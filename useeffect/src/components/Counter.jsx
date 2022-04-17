@@ -3,25 +3,20 @@ import React, { useState, useEffect } from 'react';
 export default function Counter() {
   const [count, setCount] = useState(0);
 
-  // const incrementCount  =() =>{
-  //   console.log('heeloo');
-  //   setCount((prev) => prev + 1);
-  // }
+  const incrementCount  = () =>{
+    setCount((prev) => prev + 1);
+  };
 
-  // useEffect(() => {
-  //   document.addEventListener('mousedown ', () => {
-  //     incrementCount ()
-  //   });
-  // }, []);
   useEffect(() => {
-        document.addEventListener('mousedown', () => {
-          setCount((prev) => prev + 1);
-        })
-      }, [])
-    
+    document.addEventListener('mousedown', incrementCount);
+    return () =>{
+      document.removeEventListener('mousedown', incrementCount);
+    }
+  });
   return (
     <div>
       <span> {count} </span>
     </div>
   );
 }
+
